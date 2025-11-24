@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sobre Animado</title>
+<style>
+body {
+margin: 0;
+background: #f5f3f9;
+height: 200vh; /* Para permitir scroll */
+display: flex;
+justify-content: center;
+align-items: start;
+padding-top: 120px;
+font-family: sans-serif;
+}
+
+
+.sobre-container {
+position: relative;
+width: 380px;
+height: 260px;
+perspective: 1000px;
+}
+.sobre {
+width: 100%;
+height: 100%;
+position: relative;
+}
+/* Cuerpo del sobre */
+.cuerpo {
+width: 100%;
+height: 100%;
+background: #d7c3ef; /* Lila pastel */
+border-radius: 8px;
+position: absolute;
+bottom: 0;
+z-index: 1;
+}
+/* Solapa superior */
+.solapa {
+width: 100%;
+height: 50%;
+background: #d7c3ef;
+position: absolute;
+top: 0;
+transform-origin: top;
+transform: rotateX(0deg);
+transition: transform 1s ease;
+border-radius: 8px;
+z-index: 2;
+}
+/* Interior blanco de la solapa */
+.solapa::after {
+content: "";
+position: absolute;
+width: 100%;
+height: 100%;
+background: white;
+top: 0;
+left: 0;
+transform: rotateX(180deg);
+backface-visibility: hidden;
+border-radius: 8px;
+}
+.abierto .solapa {
+transform: rotateX(-140deg);
+}
+</style>
+</head>
+<body>
+<div class="sobre-container">
+<div class="sobre" id="sobreAnimado">
+<div class="solapa"></div>
+<div class="cuerpo"></div>
+</div>
+</div>
+<script>
+const sobre = document.getElementById("sobreAnimado");
+window.addEventListener("scroll", () => {
+const triggerPoint = window.innerHeight * 0.25;
+const position = sobre.getBoundingClientRect().top;
+
+
+if (position < triggerPoint) {
+sobre.classList.add("abierto");
+}
+});
+</script>
+
+
+</body>
+</html>
